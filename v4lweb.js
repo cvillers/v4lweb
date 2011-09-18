@@ -40,15 +40,70 @@ function doTemplate(name, ctx, res) {
 	}
 	//util.log(JSON.stringify(ctx));
 	//util.log(JSON.stringify(templates[name]));
-	templates[name].eval(ctx, function(data) { res.write(data.toString()); util.log(data); });
+	templates[name].eval(ctx, function(data) { res.write(data.toString()); });
 }
 
 compileTemplates(templateRoot);
 
-function doMainPage(req, res) {
-	res.writeHeader(200, 'text/html');
-	doTemplate("index", {}, res);
+function do404(req, res) {
+        var ctx = {
+                url : url.parse(req.url).pathname,
+                title : "Page not found"
+        };
+	util.log("in do404, sending header");
+        res.writeHeader(404, 'text/html');
+	util.log("in do404, sending template");
+        //res.write('Sorry, that URL could not be found.');
+	doTemplate("404", ctx, res);
 }
+
+function doMainPage(req, res) {
+	var ctx = {
+		"title" : "v4lweb"
+	};
+	res.writeHeader(200, 'text/html');
+	doTemplate("index", ctx, res);
+}
+
+function doStatic(req, res, file) {
+	var types = {
+		"js": "text/javascript",
+	};
+
+	fs.stat("static/" + file, function(err, stats) {
+		if(err != null) {
+			util.log(JSON.stringify(err));
+			util.log("calling do404");
+			do404(req, res);
+			util.log("called do404, returning");
+			return;
+		}
+	});
+	
+	var ext = file.split('.')[1];
+
+	if(!(ext in types))
+	{
+		do404(req, res);
+		return;
+	}
+
+	res.writeHeader(200, types[ext]);
+	contents = "";
+	if(types[ext].indexOf("text") != -1)
+	{
+		fs.readFile("static/" + file, "ascii", function(err, data) {
+			req.write(data);
+		});
+	}
+	else
+	{
+		fs.readFile("static/" + file, function(err, data) {
+			req.write(data);
+		});
+	}
+}
+
 
 function doStream(req, res, streamName) {
 }
@@ -79,6 +134,11 @@ http.createServer(function(req, res) {
 		case "":	// FIXME this is the / url
 		{
 			doMainPage(req, res);
+			break;
+		}
+		case "static":
+		{
+			doStatic(req, res, path[1]);
 			break;
 		}
 		case "stream":
