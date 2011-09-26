@@ -7,11 +7,34 @@ MaxClients 10
 MaxBandwidth 10000 
 # Suppress that if you want to launch ffserver as a daemon. 
 NoDaemon 
+CustomLog -
 
-<Feed webcam.ffm> 
-File /tmp/webcam.ffm 
-FileMaxSize 50M 
+<Feed v4lweb_4503.ffm> 
+File /tmp/v4lweb/v4lweb_4503.ffm 
+FileMaxSize 10M 
 </Feed> 
+
+<Stream test.mpeg>
+Feed v4lweb_4503.ffm
+
+#Format asf
+#VideoCodec mpeg4
+Format mpeg
+VideoCodec mpeg1video
+
+VideoFrameRate 30
+VideoBufferSize 100000
+VideoBitRate 768k
+VideoQMin 1
+VideoQMax 31
+VideoSize 640x480
+PreRoll 5
+NoAudio
+#AudioCodec libmp3lame
+#AudioBitRate 56
+#AudioChannels 2
+#AudioSampleRate 24000
+</Stream>
 
 # FLV output - good for streaming 
 #<Stream webcam.flv> 
@@ -59,18 +82,18 @@ FileMaxSize 50M
 #NoAudio
 #</Stream>
 
-<Stream webcam.mjpeg>
-Feed webcam.ffm
-Format mpjpeg
-VideoSize xga
-VideoFrameRate 15
-VideoIntraOnly
-VideoBufferSize 40000
-VideoQMin 1
-VideoQMax 10
-Noaudio
-Strict -1
-</Stream>
+#<Stream webcam.mjpeg>
+#Feed webcam.ffm
+#Format mpjpeg
+#VideoSize xga
+#VideoFrameRate 15
+#VideoIntraOnly
+#VideoBufferSize 40000
+#VideoQMin 1
+#VideoQMax 10
+#Noaudio
+#Strict -1
+#</Stream>
 
 <Stream stat.html>
 Format status

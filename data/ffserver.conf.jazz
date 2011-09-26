@@ -1,0 +1,105 @@
+Port {port}
+# bind to all IPs aliased or not 
+BindAddress 127.0.0.1 
+# max number of simultaneous clients 
+MaxClients 1
+# max bandwidth per-client (kb/s) 
+MaxBandwidth 2147483647
+# Suppress that if you want to launch ffserver as a daemon. 
+NoDaemon 
+CustomLog -
+
+<Feed v4lweb_{port}.ffm> 
+File {tmpdir}/v4lweb_{port}.ffm 
+FileMaxSize 10M 
+</Feed> 
+
+<Stream {streamName}.mpeg>
+Feed v4lweb_4503.ffm
+
+#Format asf
+#VideoCodec mpeg4
+Format mpeg
+VideoCodec mpeg1video
+
+VideoFrameRate 30
+VideoBufferSize 100000
+VideoBitRate 768k
+VideoQMin 1
+VideoQMax 31
+VideoSize 640x480
+PreRoll 5
+NoAudio
+#AudioCodec libmp3lame
+#AudioBitRate 56
+#AudioChannels 2
+#AudioSampleRate 24000
+</Stream>
+
+# FLV output - good for streaming 
+#<Stream webcam.flv> 
+## the source feed 
+#Feed webcam.ffm 
+## the output stream format - FLV = FLash Video 
+#Format flv 
+#VideoCodec flv 
+## this must match the ffmpeg -r argument 
+#VideoFrameRate 30 
+## generally leave this is a large number 
+#VideoBufferSize 20000 
+## another quality tweak 
+#VideoBitRate 500 
+## quality ranges - 1-31 (1 = best, 31 = worst) 
+#VideoQMin 5
+#VideoQMax 10 
+#VideoSize vga
+## this sets how many seconds in past to start 
+#PreRoll 0 
+## wecams don't have audio 
+#Noaudio 
+#</Stream> 
+
+#<Stream webcam.swf>
+#Feed webcam.ffm
+#Format swf
+#VideoFrameRate 30
+#VideoIntraOnly
+#VideoSize xga
+#NoAudio
+#</Stream>
+
+#<Stream webcam.mpeg>
+#Feed webcam.ffm
+#Format mpeg
+#VideoCodec mpeg1video
+#VideoFrameRate 30
+#VideoBufferSize 20000
+#VideoBitRate 500
+#VideoQMin 5
+#VideoQMin 10
+#VideoSize xga
+#PreRoll 0
+#NoAudio
+#</Stream>
+
+#<Stream webcam.mjpeg>
+#Feed webcam.ffm
+#Format mpjpeg
+#VideoSize xga
+#VideoFrameRate 15
+#VideoIntraOnly
+#VideoBufferSize 40000
+#VideoQMin 1
+#VideoQMax 10
+#Noaudio
+#Strict -1
+#</Stream>
+
+<Stream stat.html>
+Format status
+
+# Only allow local people to get the status
+ACL allow localhost
+ACL allow {localRangeMin} {localRangeMax}
+
+</Stream>

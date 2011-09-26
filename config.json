@@ -1,12 +1,17 @@
 {
 	"port": 4502,
-	"processes": { 
-		"stream1": { 
+	"portRange": [4503, 4534],
+	"localRange": ["192.168.1.1", "192.168.1.255"],
+	"tmp": "/tmp/v4lweb",
+	"servers": [ 
+		{
+			"name": "stream1",
 			"device" : "/dev/video0",
 			"port" : "4503" 
 		},
-		"stream2": {
+		{
+			"name": "stream2",
 			"remote" : "http://192.168.1.2/stream"
 		}
-	}
+	]
 }
