@@ -6,8 +6,6 @@ var fs = require("fs");
 var config = JSON.parse(fs.readFileSync('config.json').toString());
 spawner.spawn(config);
 
-var templateRoot = './templates';
-
 // watch the config file
 fs.watchFile('config.json', function(curr, prev) {
 	config = JSON.parse(fs.readFileSync('./config.json').toString());
@@ -18,6 +16,4 @@ fs.watchFile('config.json', function(curr, prev) {
 	// then spawn the new ffmpeg processes
 	spawner.spawn(config);
 });
-
-templates = {};
 
