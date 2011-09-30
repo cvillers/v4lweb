@@ -5,13 +5,15 @@
 	"tmp": "/tmp/v4lweb",
 	"servers": [ 
 		{
+			"type" : "local",
 			"name": "stream1",
-			"device" : "/dev/video0",
+			"device" : "/dev/video1",
 			"port" : "4503" 
 		},
 		{
 			"name": "stream2",
-			"remote" : "http://192.168.1.2/stream"
+			"type": "remote",
+			"source" : "http://192.168.1.2/stream"
 		}
 	]
 }

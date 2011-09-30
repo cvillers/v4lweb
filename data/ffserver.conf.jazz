@@ -4,7 +4,7 @@ BindAddress 127.0.0.1
 # max number of simultaneous clients 
 MaxClients 1
 # max bandwidth per-client (kb/s) 
-MaxBandwidth 2147483647
+MaxBandwidth 100000 
 # Suppress that if you want to launch ffserver as a daemon. 
 NoDaemon 
 CustomLog -
@@ -15,7 +15,7 @@ FileMaxSize 10M
 </Feed> 
 
 <Stream {streamName}.mpeg>
-Feed v4lweb_4503.ffm
+Feed v4lweb_{port}.ffm
 
 #Format asf
 #VideoCodec mpeg4

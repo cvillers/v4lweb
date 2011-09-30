@@ -4,8 +4,18 @@ spawner = require("./lib/spawner");
 fs = require("fs");
 template = require("./lib/template");
 util = require("util");
+var path = require("path");
 
 config = JSON.parse(fs.readFileSync('config.json').toString());
+
+function checkTmpPath() {
+	path.exists(config.tmp, function (exists) {
+		if(!exists)
+			fs.mkdirSync(config.tmp, 0644);
+	});
+}
+
+checkTmpPath();
 
 spawner.spawn(config);
 template.loadTemplates(config);
@@ -13,7 +23,8 @@ template.loadTemplates(config);
 // watch the config file
 fs.watchFile('config.json', function(curr, prev) {
 	config = JSON.parse(fs.readFileSync('./config.json').toString());
-	
+	checkTmpPath();
+
 	// welp time to kill the old ones
 	spawner.killAll();
 
@@ -26,8 +37,14 @@ fs.watchFile('config.json', function(curr, prev) {
 var app = express.createServer();
 
 require("./controllers")(app);
-//app.get('/', controllers.page.index);
-//app.get('/about', controllers.page.about);
-//app.get('/static/:filename', controllers.static.index);
+
+app.use(express.favicon());
+app.use(express.logger("\":method :url\" :status"));
+app.use(app.router);
+app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+// 404
+//app.use(function(req, res, next) {
+//	template.error404("Page not found", req, res);
+//});
 
 app.listen(config.port);

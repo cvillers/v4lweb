@@ -1,4 +1,7 @@
-var staticRoot = "../static";
+var path = require("path");
+var template = require("../lib/template");
+
+var staticRoot = "./static";
 
 module.exports = function(app) {
 
@@ -11,10 +14,7 @@ app.get("/static/:filename", function(req, res) {
 
         fs.stat(path.join(staticRoot, file), function(err, stats) {
                 if(err != null) {
-                        util.log(JSON.stringify(err));
-                        util.log("calling do404");
-                        do404(req, res);
-                        util.log("called do404, returning");
+                        template.error404("File not found", req, res);
                         return;
                 }
         });
@@ -23,7 +23,7 @@ app.get("/static/:filename", function(req, res) {
 
         if(!(ext in types))
         {
-                do404(req, res);
+                template.error404("File not found", req, res);
                 return;
         }
 
