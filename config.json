@@ -1,6 +1,6 @@
 {
-	"port": 4502,
-	"portRange": [4503, 4534],
+	"port": 22104,
+	"portRange": [22105, 22135],
 	"localRange": ["192.168.1.1", "192.168.1.255"],
 	"tmp": "/tmp/v4lweb",
 	"servers": [ 
@@ -8,7 +8,7 @@
 			"type" : "local",
 			"name": "stream1",
 			"device" : "/dev/video1",
-			"port" : "4503" 
+			"port" : "22105" 
 		},
 		{
 			"name": "stream2",
