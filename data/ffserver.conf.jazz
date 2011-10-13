@@ -1,6 +1,6 @@
 Port {port}
 # bind to all IPs aliased or not 
-BindAddress 127.0.0.1 
+#BindAddress 127.0.0.1 
 # max number of simultaneous clients 
 MaxClients 1
 # max bandwidth per-client (kb/s) 

@@ -3,6 +3,9 @@
 	"portRange": [22105, 22135],
 	"localRange": ["192.168.1.1", "192.168.1.255"],
 	"tmp": "/tmp/v4lweb",
+	"useLocalFFmpeg": false, 
+	"localFFmpegPath": "/home/cmv/ffmpeg",
+	"localFFmpegLib64": false,
 	"servers": [ 
 		{
 			"type" : "local",
