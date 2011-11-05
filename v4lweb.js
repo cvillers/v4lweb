@@ -9,10 +9,12 @@ var path = require("path");
 config = JSON.parse(fs.readFileSync('config.json').toString());
 
 function checkTmpPath() {
-	path.exists(config.tmp, function (exists) {
-		if(!exists)
-			fs.mkdirSync(config.tmp, 0644);
-	});
+	exists = path.existsSync(config.tmp);
+
+	if(!exists) {
+		util.log("creating " + config.tmp);
+		fs.mkdirSync(config.tmp, 0744);
+	}
 }
 
 checkTmpPath();
