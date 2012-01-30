@@ -1,17 +1,27 @@
 {
 	"port": 4502,
-	"portRange": [4503, 4534],
+	"portRange": [22105, 22135],
 	"localRange": ["192.168.1.1", "192.168.1.255"],
 	"tmp": "/tmp/v4lweb",
+	"useLocalFFmpeg": false, 
+	"localFFmpegPath": "/home/cmv/ffmpeg",
+	"localFFmpegLib64": true,
 	"servers": [ 
 		{
+			"type" : "local",
 			"name": "stream1",
 			"device" : "/dev/video0",
-			"port" : "4503" 
+			"port" : "22105",
+			"formats" : ["mjpeg", "flv"],
+			"width": "640",
+			"height": "480",
+			"rate": "25"
 		},
 		{
 			"name": "stream2",
-			"remote" : "http://192.168.1.2/stream"
+			"type": "remote",
+			"source" : "http://192.168.1.2/stream",
+			"formats" : ["flv"]
 		}
 	]
 }

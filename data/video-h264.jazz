@@ -1,0 +1,24 @@
+VideoCodec libx264
+AVOptionVideo coder 0
+AVOptionVideo bf 0
+AVOptionVideo flags2 +mixed_refs+fastpskip
+AVOptionVideo flags +loop
+AVOptionVideo cmp +chroma
+AVOptionVideo partitions +parti8x8+parti4x4+partp8x8+partb8x8
+AVOptionVideo me_method hex
+AVOptionVideo subq 7
+AVOptionVideo me_range 16
+AVOptionVideo g 250
+AVOptionVideo keyint_min 10
+AVOptionVideo sc_threshold 40
+AVOptionVideo i_qfactor 0.71
+AVOptionVideo b_strategy 1
+AVOptionVideo qcomp 0.6
+AVOptionVideo qmin 15
+AVOptionVideo qmax 31
+AVOptionVideo qdiff 4
+AVOptionVideo refs 3
+AVOptionVideo directpred 1
+AVOptionVideo trellis 1
+AVOptionVideo wpredp 0
+AVOptionVideo flags +global_header
