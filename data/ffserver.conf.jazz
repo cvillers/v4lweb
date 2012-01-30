@@ -7,7 +7,7 @@ MaxClients 3	# a little higher for testing
 MaxBandwidth 100000 
 # Suppress that if you want to launch ffserver as a daemon. 
 NoDaemon 
-CustomLog -
+#CustomLog -
 
 <Feed v4lweb_{port}.ffm> 
 File {tmpdir}/v4lweb_{port}.ffm 
@@ -18,12 +18,12 @@ FileMaxSize 10M
 Feed v4lweb_{port}.ffm
 Format flv
 
-VideoFrameRate 30 
+VideoFrameRate {rate} 
 VideoBufferSize 100000
 VideoBitRate 768k
 VideoQMin 15
 VideoQMax 31
-VideoSize 640x480 
+VideoSize {width}x{height}
 PreRoll 0 
 
 {include("video-h264.jazz")}
@@ -31,23 +31,23 @@ PreRoll 0
 
 </Stream>
 
-<Stream {streamName}.mjpeg>
-Feed v4lweb_{port}.ffm
-Format mpjpeg
-
-VideoSize 640x480
-VideoFrameRate 30 
-VideoIntraOnly
-VideoBufferSize 100000
-VideoQMin 15
-VideoQMax 31
-VideoBitRate 1536k
-Strict -1
-PreRoll 0
-
-{include("audio-none.jazz")}
-
-</Stream>
+#<Stream {streamName}.mjpeg>
+#Feed v4lweb_{port}.ffm
+#Format mpjpeg
+#
+#VideoSize {width}x{height}
+#VideoFrameRate {rate}
+#VideoIntraOnly
+#VideoBufferSize 100000
+#VideoQMin 15
+#VideoQMax 31
+#VideoBitRate 1536k
+#Strict -1
+#PreRoll 0
+#
+#{include("audio-none.jazz")}
+#
+#</Stream>
 
 
 <Stream stat.html>

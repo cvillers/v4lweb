@@ -1,5 +1,5 @@
 {
-	"port": 22104,
+	"port": 4502,
 	"portRange": [22105, 22135],
 	"localRange": ["192.168.1.1", "192.168.1.255"],
 	"tmp": "/tmp/v4lweb",
@@ -11,12 +11,17 @@
 			"type" : "local",
 			"name": "stream1",
 			"device" : "/dev/video0",
-			"port" : "22105" 
+			"port" : "22105",
+			"formats" : ["mjpeg", "flv"],
+			"width": "640",
+			"height": "480",
+			"rate": "25"
 		},
 		{
 			"name": "stream2",
 			"type": "remote",
-			"source" : "http://192.168.1.2/stream"
+			"source" : "http://192.168.1.2/stream",
+			"formats" : ["flv"]
 		}
 	]
 }

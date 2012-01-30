@@ -24,7 +24,7 @@ spawner.spawn(config);
 
 // watch the config file
 fs.watchFile('config.json', function(curr, prev) {
-	config = JSON.parse(fs.readFileSync('./config.json').toString());
+	config = JSON.parse(fs.readFileSync('config.json').toString());
 	checkTmpPath();
 
 	// welp time to kill the old ones
@@ -44,13 +44,20 @@ process.on("exit", function () {
 var app = express.createServer();
 
 app.set("view engine", "ejs");
-
+app.set("view options", { layout: false });
 require("./controllers")(app, config);
 
-app.use(express.favicon());
-app.use(express.logger("\":method :url\" :status"));
-app.use(app.router);
-app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+app.configure(function() {
+
+	app.use(express.favicon());
+	app.use(express.logger("\":method :url\" :status"));
+	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+	app.use("/static", express.static(__dirname + "/static"));
+
+	app.use(app.router);
+
+});
+
 // 404
 //app.use(function(req, res, next) {
 //	template.error404("Page not found", req, res);
