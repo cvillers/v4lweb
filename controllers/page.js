@@ -3,7 +3,8 @@ var template = require("../lib/template");
 module.exports = function(app) {
 
 app.get("/", function(req, res) {
-	template.render("index", {"title":"Index"}, res);
+	//template.render("index", {"title":"Index"}, res);
+	res.write("test");
 	res.end();
 });
 

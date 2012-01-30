@@ -1,6 +1,0 @@
-{include("header")}
-		<h2>{streamName}</h2>
-		<p>You are watching {streamName}.</p>
-		<div id="player_live" style="display:block; width: 720px; height: 480px;">
-		</div>
-{include("footer")}

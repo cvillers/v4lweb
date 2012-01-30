@@ -43,6 +43,8 @@ process.on("exit", function () {
 // But seeing as we have so few it's not a big problem
 var app = express.createServer();
 
+app.set("view engine", "ejs");
+
 require("./controllers")(app, config);
 
 app.use(express.favicon());

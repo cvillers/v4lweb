@@ -18,12 +18,12 @@ FileMaxSize 10M
 Feed v4lweb_{port}.ffm
 Format flv
 
-VideoFrameRate 20
+VideoFrameRate 30 
 VideoBufferSize 100000
 VideoBitRate 768k
-VideoQMin 10
+VideoQMin 15
 VideoQMax 31
-VideoSize 320x240 
+VideoSize 640x480 
 PreRoll 0 
 
 {include("video-h264.jazz")}
@@ -35,11 +35,11 @@ PreRoll 0
 Feed v4lweb_{port}.ffm
 Format mpjpeg
 
-VideoSize 320x240
-VideoFrameRate 20 
+VideoSize 640x480
+VideoFrameRate 30 
 VideoIntraOnly
 VideoBufferSize 100000
-VideoQMin 10
+VideoQMin 15
 VideoQMax 31
 VideoBitRate 1536k
 Strict -1

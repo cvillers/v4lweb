@@ -10,7 +10,7 @@
 		{
 			"type" : "local",
 			"name": "stream1",
-			"device" : "/dev/video1",
+			"device" : "/dev/video0",
 			"port" : "22105" 
 		},
 		{

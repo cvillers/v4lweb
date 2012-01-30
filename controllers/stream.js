@@ -8,8 +8,8 @@ config = _config;
 
 app.get("/stream/view/:stream", function(req, res) {
 	var stream = req.params.stream;
-        template.render("streamView", {"title":"View " + stream, "streamName": stream}, res);
-	res.socket.end();
+        template.render("streamView", {"title":"View " + stream, "streamName": stream, "streamPage": true}, res);
+	res.end();
 });
 
 app.get("/stream/data/:stream", function(req, res) {
@@ -28,6 +28,12 @@ app.get("/stream/data/:stream", function(req, res) {
 });
 
 // TODO /stream/js/:stream to generate flowplayer embed code for each stream
+
+app.get("/stream/js/:stream", function(req, res) {
+	var stream = req.params.stream;
+	template.render("streamJS", {"streamName":stream}, res);
+	res.end()
+});
 
 };
 

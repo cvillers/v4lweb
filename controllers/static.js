@@ -1,11 +1,12 @@
 var path = require("path");
+var util = require("util");
 var template = require("../lib/template");
 
-var staticRoot = "./static";
+var staticRoot = "../static";
 
 module.exports = function(app) {
 
-var regex = new RegExp("^\/static/([a-zA-Z0-9\.\-])");
+var regex = new RegExp("/static/([a-zA-Z0-9\.\-])");
 
 app.get(regex, function(req, res) {
 	var types = {
@@ -34,13 +35,18 @@ app.get(regex, function(req, res) {
         if(types[ext].indexOf("text") != -1)
         {
                 fs.readFile(path.join(staticRoot, file), "ascii", function(err, data) {
-                        res.write(data);
+			if(data != null) {
+				util.log(data);
+	                        res.write(data);
+			}
                 });
         }
         else
         {
                 fs.readFile(path.join(staticRoot, file), function(err, data) {
-                        res.write(data);
+			if(data != null) {
+	                        res.write(data);
+			}
                 });
         }
 
