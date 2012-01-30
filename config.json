@@ -3,14 +3,14 @@
 	"portRange": [22105, 22135],
 	"localRange": ["192.168.1.1", "192.168.1.255"],
 	"tmp": "/tmp/v4lweb",
-	"useLocalFFmpeg": true, 
+	"useLocalFFmpeg": false, 
 	"localFFmpegPath": "/home/cmv/ffmpeg",
 	"localFFmpegLib64": true,
 	"servers": [ 
 		{
 			"type" : "local",
 			"name": "stream1",
-			"device" : "/dev/video0",
+			"device" : "/dev/video1",
 			"port" : "22105" 
 		},
 		{
