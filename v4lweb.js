@@ -9,10 +9,12 @@ var path = require("path");
 config = JSON.parse(fs.readFileSync('config.json').toString());
 
 function checkTmpPath() {
-	path.exists(config.tmp, function (exists) {
-		if(!exists)
-			fs.mkdirSync(config.tmp, 0644);
-	});
+	exists = path.existsSync(config.tmp);
+
+	if(!exists) {
+		util.log("creating " + config.tmp);
+		fs.mkdirSync(config.tmp, 0744);
+	}
 }
 
 checkTmpPath();
@@ -32,11 +34,16 @@ fs.watchFile('config.json', function(curr, prev) {
 	spawner.spawn(config);
 });
 
+process.on("exit", function () {
+	util.log("killing all");
+	spawner.killAll();
+});
+
 // This really isn't the most optimal way to define routes
 // But seeing as we have so few it's not a big problem
 var app = express.createServer();
 
-require("./controllers")(app);
+require("./controllers")(app, config);
 
 app.use(express.favicon());
 app.use(express.logger("\":method :url\" :status"));

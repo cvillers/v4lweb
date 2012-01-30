@@ -1,4 +1,5 @@
-module.exports = function(app) {
-	require("./page")(app);
-	require("./static")(app);
+module.exports = function(app, config) {
+	require("./page")(app, config);
+	require("./static")(app, config);
+	require("./stream")(app, config);
 };

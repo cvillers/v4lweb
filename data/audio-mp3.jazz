@@ -1,0 +1,5 @@
+AudioBitRate 64 
+AudioChannels 1 
+AudioSampleRate 11025 
+AVOptionAudio flags +global_header
+AudioCodec libmp3lame

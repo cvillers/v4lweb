@@ -5,12 +5,14 @@ var staticRoot = "./static";
 
 module.exports = function(app) {
 
-app.get("/static/:filename", function(req, res) {
+var regex = new RegExp("^\/static/([a-zA-Z0-9\.\-])");
+
+app.get(regex, function(req, res) {
 	var types = {
 		"js" : "text/javascript",
 	};
 	
-	var file = req.params.filename;
+	var file = req.params[0];
 
         fs.stat(path.join(staticRoot, file), function(err, stats) {
                 if(err != null) {
@@ -41,6 +43,8 @@ app.get("/static/:filename", function(req, res) {
                         res.write(data);
                 });
         }
+
+	res.end();
 });
 
 };

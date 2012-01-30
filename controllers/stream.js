@@ -1,0 +1,33 @@
+var template = require("../lib/template");
+var httpProxy = require("http-proxy");
+var config = {};
+
+module.exports = function(app, _config) {
+
+config = _config;
+
+app.get("/stream/view/:stream", function(req, res) {
+	var stream = req.params.stream;
+        template.render("streamView", {"title":"View " + stream, "streamName": stream}, res);
+	res.socket.end();
+});
+
+app.get("/stream/data/:stream", function(req, res) {
+	var proxy = new httpProxy.RoutingProxy();
+	var stream = req.params.stream;
+	var server = {};
+	// FIXME this is bad
+	for(s in config.servers) {
+		if(config.servers[s].name == stream)	// WTF
+			server = config.servers[s];
+	}
+	proxy.proxyRequest(req, res, {
+		host: "localhost",
+		port: server.port
+	});
+});
+
+// TODO /stream/js/:stream to generate flowplayer embed code for each stream
+
+};
+
