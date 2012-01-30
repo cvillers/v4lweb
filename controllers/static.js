@@ -1,6 +1,6 @@
 var path = require("path");
 var util = require("util");
-var template = require("../lib/template");
+//var template = require("../lib/template");
 
 var staticRoot = "../static";
 
@@ -17,7 +17,8 @@ app.get(regex, function(req, res) {
 
         fs.stat(path.join(staticRoot, file), function(err, stats) {
                 if(err != null) {
-                        template.error404("File not found", req, res);
+                        //template.error404("File not found", req, res);
+			res.send("File not found", 404);
                         return;
                 }
         });
@@ -26,7 +27,8 @@ app.get(regex, function(req, res) {
 
         if(!(ext in types))
         {
-                template.error404("File not found", req, res);
+                //template.error404("File not found", req, res);
+		res.send("File not found", 404);
                 return;
         }
 

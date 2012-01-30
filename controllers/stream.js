@@ -1,4 +1,4 @@
-var template = require("../lib/template");
+//var template = require("../lib/template");
 var httpProxy = require("http-proxy");
 var config = {};
 
@@ -8,7 +8,8 @@ config = _config;
 
 app.get("/stream/view/:stream", function(req, res) {
 	var stream = req.params.stream;
-        template.render("streamView", {"title":"View " + stream, "streamName": stream, "streamPage": true}, res);
+        //template.render("streamView", {"title":"View " + stream, "streamName": stream, "streamPage": true}, res);
+	res.render("streamView", { title: "View " + stream, streamName: stream, streamPage: true });
 	res.end();
 });
 
@@ -31,7 +32,8 @@ app.get("/stream/data/:stream", function(req, res) {
 
 app.get("/stream/js/:stream", function(req, res) {
 	var stream = req.params.stream;
-	template.render("streamJS", {"streamName":stream}, res);
+	//template.render("streamJS", {"streamName":stream}, res);
+	res.render("streamJS", { streamName: stream });
 	res.end()
 });
 

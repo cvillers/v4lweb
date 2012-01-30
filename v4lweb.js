@@ -2,7 +2,7 @@ express = require("./node_modules/express");
 jazz = require("./node_modules/jazz");
 spawner = require("./lib/spawner");
 fs = require("fs");
-template = require("./lib/template");
+//template = require("./lib/template");
 util = require("util");
 var path = require("path");
 
@@ -20,7 +20,7 @@ function checkTmpPath() {
 checkTmpPath();
 
 spawner.spawn(config);
-template.loadTemplates(config);
+//template.loadTemplates(config);
 
 // watch the config file
 fs.watchFile('config.json', function(curr, prev) {
