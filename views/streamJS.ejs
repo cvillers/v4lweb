@@ -1,16 +1,24 @@
-$(document).ready(function () {
-	flowplayer("player_live",
-	"/static/flowplayer-3.2.7.swf",
-	{
-		"plugins": {
-			pseudo: { "url": "/static/flowplayer.pseudostreaming-3.2.7.swf" }
-		},
-		"clip": {
-			"provider": "pseudo",
-			"url": "/stream/data/<%= streamName %>/flv",
-			"width": "<%= width %>",
-			"height": "<%= height %>"
-		}
+var options = {
+	plugins: {
+		pseudo: { "url": "/static/flowplayer.pseudostreaming-3.2.7.swf" }
+	},
+	clip: {
+		"provider": "pseudo",
+		"url": "/stream/data/<%= streamName %>/flv",
+		"width": "<%= width %>",
+		"height": "<%= height %>",
 	}
+};
+
+var player = {
+	src: "/static/flowplayer-3.2.7.swf",
+	wmode: "opaque"
+};
+
+$(document).ready(function () {
+	flowplayer(
+		"player_live",
+		player,
+		options
 	)
 });
