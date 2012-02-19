@@ -18,7 +18,6 @@ app.get("/stream/view/:stream/:format", function(req, res) {
 		width: server.width,
 		height: server.height
 	});
-	//res.end();
 });
 
 app.get("/stream/data/:stream/:format", function(req, res) {
@@ -46,7 +45,6 @@ app.get("/stream/js/:stream", function(req, res) {
 	
 	res.contentType("application/javascript");
 	res.render("streamJS", { streamName: stream, width: server.width, height: server.height });
-	//res.end();
 });
 
 };

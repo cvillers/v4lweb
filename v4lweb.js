@@ -2,7 +2,6 @@ express = require("./node_modules/express");
 jazz = require("./node_modules/jazz");
 spawner = require("./lib/spawner");
 fs = require("fs");
-//template = require("./lib/template");
 util = require("util");
 var path = require("path");
 
@@ -20,14 +19,13 @@ function checkTmpPath() {
 checkTmpPath();
 
 spawner.spawn(config);
-//template.loadTemplates(config);
 
 // watch the config file
 fs.watchFile('config.json', function(curr, prev) {
 	config = JSON.parse(fs.readFileSync('config.json').toString());
 	checkTmpPath();
 
-	// welp time to kill the old ones
+	// time to kill the old ones
 	spawner.killAll();
 
 	// then spawn the new ffmpeg processes
@@ -39,8 +37,6 @@ process.on("exit", function () {
 	spawner.killAll();
 });
 
-// This really isn't the most optimal way to define routes
-// But seeing as we have so few it's not a big problem
 var app = express.createServer();
 
 app.set("view engine", "ejs");
@@ -57,10 +53,5 @@ app.configure(function() {
 	app.use(app.router);
 
 });
-
-// 404
-//app.use(function(req, res, next) {
-//	template.error404("Page not found", req, res);
-//});
 
 app.listen(config.port);
