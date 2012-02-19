@@ -20,6 +20,13 @@
 		<link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     
 		<script src="/static/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+		<script src="/static/bootstrap-popover.js" type="text/javascript"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$(".stream-pop").popover();
+			});
+		</script>
 
         <!--[if lt IE 9]>
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -33,7 +40,7 @@
 						<ul class="nav nav-list">
 							<li class="nav-header">v4lweb</li>
 							<% for(p in config.pages) { %>
-								<% if(typeof staticPageName != 'undefined' && staticPageName == config.pages[p].title) { %>
+								<% if(typeof staticPageName != 'undefined' && staticPageName == config.pages[p].url) { %>
 									<li class="active">
 								<% } else { %>
 									<li>
@@ -51,9 +58,11 @@
 									// assuming that streamName exists by necessity if we've gotten this far
 									if(typeof streamName != 'undefined' && config.servers[s].name == streamName) {
 							%>
-										class="active"
+										class="active stream-pop"
+							<%		} else { %>
+										class="stream-pop"
 							<%		} %>
-										>
+										data-content="<%= config.servers[s].description %>" data-original-title="<%= config.servers[s].displayName %>">
 										<a href="/stream/view/<%= config.servers[s].name %>/flv"><%= config.servers[s].displayName %></a></li>
 							<%
 								}
