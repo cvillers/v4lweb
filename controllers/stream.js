@@ -21,8 +21,6 @@ app.get("/stream/view/:stream/:format", function(req, res) {
 });
 
 app.get("/stream/data/:stream/:format", function(req, res) {
-	util.log("in /stream/data/" + req.params.stream);
-
 	var proxy = new httpProxy.RoutingProxy();
 
 	var name = req.params.stream;
@@ -41,7 +39,7 @@ app.get("/stream/data/:stream/:format", function(req, res) {
 app.get("/stream/js/:stream", function(req, res) {
 	var stream = req.params.stream;
 	
-	var server = spawner.findServer(stream, "flv");	// js right now is only needed for the flv stream
+	var server = spawner.findServer(stream, "flv");	// cheat here because js right now is only needed for the flv stream
 	
 	res.contentType("application/javascript");
 	res.render("streamJS", { streamName: stream, width: server.width, height: server.height });
