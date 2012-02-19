@@ -23,4 +23,33 @@
         <![endif]-->        
     </head>
     <body>
-        <div class="container-fluid">       
+        <div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span2">
+					<div class="well sidebar-nav">
+						<ul class="nav nav-list">
+							<li class="nav-header">v4lweb</li>
+							<li><a href="/">Home</a></li>
+							<li><a href="/about">About</a></li>
+							<li class="nav-header">Select a stream</li>
+							<%
+								if(typeof streamPage != 'undefined' && streamPage) {
+									for(s in servers) {
+							%>
+										<li id="stream-<%=servers[s].name%>" 
+							<%
+										// assuming that streamName exists by necessity if we've gotten this far
+										if(servers[s].name == streamName) {
+							%>
+											class="active"
+							<%			} %>
+											>
+											<a href="/stream/view/<%=servers[s].name%>"><%=server[s].displayName%>
+							<%
+									}
+								}
+							%>
+						</ul>
+					</div>
+				</div>	<!-- div.well.sidebar-nav -->
+			<div class="span10">
