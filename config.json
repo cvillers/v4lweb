@@ -34,11 +34,13 @@
 	"pages": { 
 		"home":
 		{
-			"title" : "Home"
+			"title" : "Home",
+			"url": "home"
 		},
 		"about":
 		{
-			"title" : "About v4lweb"
+			"title" : "About v4lweb",
+			"url": "about"
 		}
 	}
 }
