@@ -1,9 +1,9 @@
-v4lweb v0.2
+v4lweb v0.3
 ====
 
 v4lweb is a simple way to publish video4linux devices to the Internet at large.
 
-It's under heavy development at this time and is not recommended for production use. It does, however, work.
+It's under heavy development at this time and is not recommended for production use. It does, however, work for local sources.
 
 NOTES
 ====

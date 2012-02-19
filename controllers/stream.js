@@ -9,7 +9,15 @@ config = _config;
 app.get("/stream/view/:stream/:format", function(req, res) {
 	var stream = req.params.stream;
 	var server = spawner.findServer(stream, req.params.format);
-	res.render("streamView", { title: "Viewing feed " + server.displayName, displayName: server.displayName, description: server.description, streamName: stream, streamPage: true });
+	res.render("streamView", {
+		title: "Viewing feed " + server.displayName,
+		displayName: server.displayName,
+		description: server.description,
+		streamName: stream,
+		streamPage: true,
+		width: server.width,
+		height: server.height
+	});
 	//res.end();
 });
 
