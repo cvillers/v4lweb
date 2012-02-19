@@ -10,6 +10,8 @@
 		{
 			"type" : "local",
 			"name": "stream1",
+			"displayName": "Stream 1",
+			"description": "This is a sample stream.",
 			"device" : "/dev/video0",
 			"port" : "22105",
 			"formats" : ["mjpeg", "flv"],
