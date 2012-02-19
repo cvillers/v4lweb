@@ -1,13 +1,13 @@
 <html>
     <head>
         <title><%= title %></title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
         <% if(typeof streamPage != 'undefined' && streamPage) { %>
             <script src="/stream/js/<%= streamName %>" type="text/javascript"></script>
             <script src="/static/flowplayer-3.2.6.min.js" type="text/javascript"></script>
         <% } %>
-        <link rel="stylesheet/less" type="text/css" href="/static/bootstrap/less/bootstrap.less">
-        <script src="/static/less-1.2.1.min.js"></script>
+
+		<link href="/static/bootstrap/css/bootstrap.css" rel="stylesheet">
         <style type="text/css">
           body {
             padding-top: 60px;
@@ -17,7 +17,10 @@
             padding: 9px 0;
           }
         </style>
+		<link href="/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
     
+		<script src="/static/bootstrap/js/bootstrap.js" type="text/javascript"></script>
+
         <!--[if lt IE 9]>
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->        
@@ -29,24 +32,30 @@
 					<div class="well sidebar-nav">
 						<ul class="nav nav-list">
 							<li class="nav-header">v4lweb</li>
-							<li><a href="/">Home</a></li>
-							<li><a href="/about">About</a></li>
+							<% for(p in config.pages) { %>
+								<% if(typeof staticPageName != 'undefined' && staticPageName == config.pages[p].title) { %>
+									<li class="active">
+								<% } else { %>
+									<li>
+								<% } %>
+								<a href="/<%= config.pages[p].url %>"><%= config.pages[p].title %></a>
+								</li>
+							<% } %>
+
 							<li class="nav-header">Select a stream</li>
 							<%
-								if(typeof streamPage != 'undefined' && streamPage) {
-									for(s in servers) {
+								for(s in config.servers) {
 							%>
-										<li id="stream-<%=servers[s].name%>" 
+									<li id="stream-<%= config.servers[s].name %>" 
 							<%
-										// assuming that streamName exists by necessity if we've gotten this far
-										if(servers[s].name == streamName) {
+									// assuming that streamName exists by necessity if we've gotten this far
+									if(typeof streamName != 'undefined' && config.servers[s].name == streamName) {
 							%>
-											class="active"
-							<%			} %>
-											>
-											<a href="/stream/view/<%=servers[s].name%>"><%=server[s].displayName%>
+										class="active"
+							<%		} %>
+										>
+										<a href="/stream/view/<%= config.servers[s].name %>"><%= config.servers[s].displayName %></a></li>
 							<%
-									}
 								}
 							%>
 						</ul>
