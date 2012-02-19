@@ -1,17 +1,15 @@
-//var template = require("../lib/template");
+var spawner = require("../lib/spawner");
 
 module.exports = function(app) {
 
-app.get("/", function(req, res) {
-	//template.render("index", {"title":"Index"}, res);
-	//res.write("test");
-	res.render("index", { title : "Index" });
+app.get("/:page", function(req, res) {
+	res.render(req.params.page, { title: config.pages[req.params.page].title, servers: config.servers });
 	//res.end();
 });
 
-app.get("/about", function(req, res) {
-	res.render("about", {title:"About"});
-	//res.end();
-});
+//app.get("/about", function(req, res) {
+//	res.render("about", { title: "About", servers: config.servers });
+//	//res.end();
+//});
 
 };
