@@ -1,17 +1,26 @@
-//var template = require("../lib/template");
+var spawner = require("../lib/spawner");
 
 module.exports = function(app) {
 
-app.get("/", function(req, res) {
-	//template.render("index", {"title":"Index"}, res);
-	//res.write("test");
-	res.render("index", { title : "Index" });
-	//res.end();
-});
+function pageHandler(req, res) {
+	page = "";
 
-app.get("/about", function(req, res) {
-	res.render("about", {title:"About"});
+	if(typeof req.params.page == 'undefined')
+		page = "home";
+	else
+		page = req.params.page;
+
+	res.render(page, { title: config.pages[page].title, config: config, staticPageName: page });
 	//res.end();
-});
+}
+
+app.get("/", pageHandler);
+app.get("/:page", pageHandler);
+
+
+//app.get("/about", function(req, res) {
+//	res.render("about", { title: "About", servers: config.servers });
+//	//res.end();
+//});
 
 };

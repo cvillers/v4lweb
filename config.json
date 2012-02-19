@@ -10,6 +10,8 @@
 		{
 			"type" : "local",
 			"name": "stream1",
+			"displayName": "Stream 1",
+			"description": "This is a sample stream.",
 			"device" : "/dev/video0",
 			"port" : "22105",
 			"formats" : ["mjpeg", "flv"],
@@ -19,9 +21,26 @@
 		},
 		{
 			"name": "stream2",
+			"displayName": "Remote stream",
+			"description": "This is a sample of a remote stream. That isn't actually implemented yet.",
 			"type": "remote",
 			"source" : "http://192.168.1.2/stream",
-			"formats" : ["flv"]
+			"formats" : ["flv"],
+			"width": "480",
+			"height": "360",
+			"rate": "15"
 		}
-	]
+	],
+	"pages": { 
+		"home":
+		{
+			"title" : "Home",
+			"url": "home"
+		},
+		"about":
+		{
+			"title" : "About v4lweb",
+			"url": "about"
+		}
+	}
 }
